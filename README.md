@@ -42,3 +42,30 @@ The METRICSTICS project endeavours to create a comprehensive system for analyzin
 
 ## Roles And Responsibilities
 ### Deliverable 1
+<table>
+  <tr>
+    <th>Team Member</th>
+    <th>Individual Tasks & Responsibilities</th>
+  </tr>
+  <tr>
+    <td>Nishant Arora</td>
+    <td><b>Problem 1:</b> Preparing 2 Goal Specific Questions(1,2)<br><b>Problem 2:</b><li> Created 2 Use Case Descriptions (UC003 & UC004)</li><li>Developed Use Case Diagram</li></td>
+  </tr>
+  <tr>
+    <td>Shivangi Arul</td>
+    <td><b>Problem 1:</b> Preparing 2 Goal Specific Questions(3,9)<br><b>Problem 2:</b><li> Created 2 Use Case Descriptions (UC007 & UCxxx)</li>Designed LaTeX documentation</td>
+  </tr>
+  <tr>
+    <td>Dvij Barot</td>
+    <td><b>Problem 1:</b> Preparing 2 Goal Specific Questions(4,5)<br><b>Problem 2:</b><li> Created 2 Use Case Descriptions (UC001 & UC002)</li><li>Developed Use Case Diagram</li></td>
+  </tr>
+  <tr>
+    <td>Papry Barua</td>
+    <td><b>Problem 1:</b> Preparing 2 Goal Specific Questions(6,7)<br><b>Problem 2:</b><li> Created 2 Use Case Descriptions (UC006 & UCxxx)</li>Designed LaTeX documentation</td>
+  </tr>
+  <tr>
+    <td>Poojitha Bhupalli</td>
+    <td><b>Problem 1:</b> Preparing 2 Goal Specific Questions(8,10)<br><b>Problem 2:</b><li> Created 2 Use Case Descriptions (UC005 & UCxxx)</li>Designed LaTeX documentation</td>
+  </tr>
+</table>
+<p><i> Table. 2 Deliverabile-1 Tasks and Responsibilities </i></p>

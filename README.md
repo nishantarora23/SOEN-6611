@@ -80,7 +80,7 @@ The METRICSTICS project endeavours to create a comprehensive system for analyzin
 <p><i> Fig. 2 Metricstics Prototype</i></p>
 
 ### Pending Items:
-- Generate Random Data up to 25000
+- Generate Random Data up to 1000
 - Format result up to 2 decimal values
 - Help Button
 - Visualize Data

@@ -70,8 +70,14 @@ The METRICSTICS project endeavours to create a comprehensive system for analyzin
 </table>
 <p><i> Table. 2 Deliverable-1 Tasks and Responsibilities </i></p>
 
+## METRICSTICS Use Case Diagram
+![image](https://github.com/nishantarora23/SOEN-6611/assets/42149632/e9fe6be7-d70d-4c17-9ba0-fcf75ac827b9)
+<p><i> Fig. 1 Use Case Diagram for Metricstics Calculator </i></p>
+
+
 ## METRICSTICS PROTOTYPE-1
 ![image](https://github.com/nishantarora23/SOEN-6611/assets/42149632/b7471b3d-64af-47f3-b649-e42b7347c337)
+<p><i> Fig. 2 Metricstics Prototype</i></p>
 
 ### Pending Items:
 - Generate Random Data up to 25000

@@ -68,4 +68,16 @@ The METRICSTICS project endeavours to create a comprehensive system for analyzin
     <td><b>Problem 1:</b> Preparing 2 Goal Specific Questions(8,10)<br><b>Problem 2:</b><li> Created 2 Use Case Descriptions (UC005 & UC009)</li>Designed LaTeX documentation</td>
   </tr>
 </table>
-<p><i> Table. 2 Deliverabile-1 Tasks and Responsibilities </i></p>
+<p><i> Table. 2 Deliverable-1 Tasks and Responsibilities </i></p>
+
+## METRICSTICS PROTOTYPE-1
+![image](https://github.com/nishantarora23/SOEN-6611/assets/42149632/b7471b3d-64af-47f3-b649-e42b7347c337)
+
+### Pending Items:
+- Generate Random Data up to 25000
+- Format result up to 2 decimal values
+- Help Button
+- Visualize Data
+- Manage session
+- Multithreading & Performance Improvement
+

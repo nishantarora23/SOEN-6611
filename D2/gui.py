@@ -1,7 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
-from statistics import calculate_statistics, export_to_csv
+from MetricsticsMain import *
+
 import random
 
 class MetricsApp:
@@ -50,11 +51,11 @@ class MetricsApp:
         result_label.grid(row=1, column=0, padx=5, pady=5, sticky="w")
 
         help_icon = tk.PhotoImage(file="help.png")
-        help_button = ttk.Button(master, image=help_icon, style='IconButton.TButton')
-        help_button.grid(row=0, column=1, sticky="ne")
+        #help_button = ttk.Button(master, image=help_icon, style='IconButton.TButton')
+        #help_button.grid(row=0, column=1, sticky="ne")
 
         style.configure('IconButton.TButton', borderwidth=0)
-        help_button.bind("<Button-1>", lambda e: self.show_help())
+        #help_button.bind("<Button-1>", lambda e: self.show_help())
 
         self.export_button = ttk.Button(bottom_frame, text="Export to CSV")
         self.export_button.grid(row=3, column=0, columnspan=2, padx=5, pady=5, sticky="ew")
@@ -72,14 +73,14 @@ class MetricsApp:
         data = data.split(',')
         data = [float(x.strip()) for x in data if x.strip()]
         
-        self.result_text.set(calculate_statistics(data, selected_option))
+        self.result_text.set(MetricsticsMain.calculate_metricstics(data, selected_option))
 
         self.export_button.grid(row=4, column=0, columnspan=2, padx=5, pady=5, sticky="ew")
         export_data = {"Data": data, "Statistic": selected_option}
         self.export_button.config(command=lambda: self.export_to_csv(export_data))
 
     def export_to_csv(self, data_dict):
-        self.result_text.set(export_to_csv(data_dict))
+        self.result_text.set(MetricsticsMain.export_to_csv(data_dict))
 
     def clear_data(self):
         self.entry_data.delete("1.0", tk.END)

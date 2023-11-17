@@ -79,11 +79,3 @@ The METRICSTICS project endeavours to create a comprehensive system for analyzin
 ![image](https://github.com/nishantarora23/SOEN-6611/assets/42149632/b7471b3d-64af-47f3-b649-e42b7347c337)
 <p><i> Fig. 2 Metricstics Prototype</i></p>
 
-### Pending Items:
-- Generate Random Data up to 1000
-- Format result up to 2 decimal values
-- Help Button
-- Visualize Data
-- Manage session
-- Multithreading & Performance Improvement
-

@@ -37,7 +37,7 @@ class MetricsticsCalculator:
                 unique_items.append(item)
                 frequencies.append(1)
 
-        max_freq = metricstics_max(frequency.values())
+        max_freq = MetricsticsCalculator.metricstics_max(frequencies)
         modes = []
         for item, freq in zip(unique_items, frequencies):
             if freq == max_freq:
@@ -76,18 +76,18 @@ class MetricsticsCalculator:
     def metricstics_mean_absolute_deviation(data):
         if not data:
             return None
-        mean = metricstics_mean(data)
+        mean = MetricsticsCalculator.metricstics_mean(data)
         abs_diff_sum = 0
         for item in data:
             abs_diff_sum += MetricsticsHelper.metricstics_abs(item - mean)
 
-        n = metricstics_len(data)
+        n = MetricsticsHelper.metricstics_len(data)
         mad = abs_diff_sum / n
         return mad
 
     @staticmethod
     def metricstics_standard_deviation(data):
-        variance = metricstics_variance(data)
+        variance = MetricsticsCalculator.metricstics_variance(data)
         if variance is None:
             return None
         standard_deviation = variance ** 0.5
@@ -97,7 +97,7 @@ class MetricsticsCalculator:
     def metricstics_variance(data):
         if not data:
             return None
-        mean = metricstics_mean(data)
+        mean = MetricsticsCalculator.metricstics_mean(data)
         squared_diff_sum = 0
         for item in data:
             squared_diff_sum += (item - mean) ** 2

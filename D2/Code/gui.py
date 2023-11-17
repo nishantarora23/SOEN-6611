@@ -2,9 +2,8 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter.simpledialog import askinteger
 from MetricsticsMain import *
-
+from tkinter import filedialog
 import random
-
 
 class MetricsApp:
     def __init__(self, master):
@@ -29,6 +28,8 @@ class MetricsApp:
         random_data_button = ttk.Button(options_frame, text="Generate Random Data", command=self.generate_random_data,
                                         width=25)
         random_data_button.grid(row=2, column=0, padx=5, pady=5, sticky="ew")
+        upload_button = ttk.Button(options_frame, text="Upload File", command=self.upload_file, width=25)
+        upload_button.grid(row=3, column=0, padx=5, pady=5, sticky="ew")
         right_frame = tk.Frame(master)
         right_frame.grid(row=0, column=1, padx=10, pady=10, sticky="ne")
 
@@ -78,8 +79,12 @@ class MetricsApp:
             self.result_text.set(result)
         else:
             label, numeric_value = result.split(':')
-            rounded_numeric_value = round(float(numeric_value.strip()), 3)
-            rounded_result = f"{label.strip()}: {rounded_numeric_value}"
+            numeric_value = numeric_value.strip()
+            if '.' in numeric_value and len(numeric_value.split('.')[1]) > 2:
+                rounded_numeric_value = round(float(numeric_value), 3)
+                rounded_result = f"{label.strip()}: {rounded_numeric_value}"
+            else:
+                rounded_result = f"{label.strip()}: {numeric_value}"
             self.result_text.set(rounded_result)
         self.export_button.grid(row=4, column=0, columnspan=2, padx=5, pady=5, sticky="ew")
         export_data = {"Data": data, "Statistic": selected_option}
@@ -117,3 +122,15 @@ class MetricsApp:
 
         close_button = ttk.Button(help_window, text="Close", command=help_window.destroy)
         close_button.pack(pady=10)
+
+    def upload_file(self):
+        # Open a file dialog to choose a file
+        file_path = filedialog.askopenfilename(title="Select a file",
+                                               filetypes=[("Text files", "*.txt")])
+
+        # Read the content of the selected file and insert it into the entry_data Text widget
+        if file_path:
+            with open(file_path, 'r') as file:
+                file_content = file.read()
+                self.entry_data.delete("1.0", tk.END)
+                self.entry_data.insert(tk.END, file_content)

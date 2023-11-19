@@ -1,15 +1,18 @@
 class MetricsticsHelper:
+    def __init__(self):
+        self.data = None
 
     @staticmethod
-    def metricstics_sum(data):
+    def metricstics_sum(self, data):
         """ Calculate the sum of a list of numbers."""
+        self.data = data  # Store data in the instance variable
         total = 0
         for item in data:
             total += item
         return total
 
     @staticmethod
-    def metricstics_len(data):
+    def metricstics_len(self, data):
         """ Get the length of a list."""
         count = 0
         for _ in data:
@@ -17,18 +20,19 @@ class MetricsticsHelper:
         return count
 
     @staticmethod
-    def metricstics_sort(data):
+    def metricstics_sort(self, data):
         """ Sort a list in ascending order."""
-        n = MetricsticsHelper.metricstics_len(data)
+        self.data = data  # Store data in the instance variable
+        n = self.metricstics_len(data)
         for i in range(n):
             for j in range(0, n - i - 1):
                 if data[j] > data[j + 1]:
                     data[j], data[j + 1] = data[j + 1], data[j]
 
     @staticmethod
-    def metricstics_abs(x):
+    def metricstics_abs(number):
         """ Calculate the absolute value of a number."""
-        if x < 0:
-            return -x
+        if number < 0:
+            return -number
         else:
-            return x
+            return number

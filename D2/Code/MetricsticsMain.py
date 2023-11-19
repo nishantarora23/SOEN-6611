@@ -3,26 +3,33 @@ from MetricsticsCalculator import *
 
 class MetricsticsMain:
     """  A class designed for computing statistical measures on a list of numbers, excluding the utilization of built- in functions. """
+    def __init__(self):
+        self.data = None
+        self.result = None
 
     @staticmethod
-    def calculate_metricstics(data, selected_option):
+    def calculate_metricstics(self, data, selected_option):
         if not data:
-            return "Please enter valid data"
+            self.result = "Please enter valid data"
+            return self.result
 
         if selected_option == "Minimum":
-            return f"Minimum: {MetricsticsCalculator.metricstics_min(data)}"
+            self.result = f"Minimum: {self.metricstics_min(data)}"
         elif selected_option == "Maximum":
-            return f"Maximum: {MetricsticsCalculator.metricstics_max(data)}"
+            self.result = f"Maximum: {self.metricstics_max(data)}"
         elif selected_option == "Mode":
-            return f"Mode: {MetricsticsCalculator.metricstics_mode(data)}"
+            self.result = f"Mode: {self.metricstics_mode(data)}"
         elif selected_option == "Median":
-            return f"Median: {MetricsticsCalculator.metricstics_median(data)}"
+            self.result = f"Median: {self.metricstics_median(data)}"
         elif selected_option == "Mean":
-            return f"Mean: {MetricsticsCalculator.metricstics_mean(data)}"
+            self.result = f"Mean: {self.metricstics_mean(data)}"
         elif selected_option == "Mean Absolute Deviation":
-            return f"Mean Absolute Deviation: {MetricsticsCalculator.metricstics_mean_absolute_deviation(data)}"
+            self.result = f"Mean Absolute Deviation: {self.metricstics_mean_absolute_deviation(data)}"
         elif selected_option == "Standard Deviation":
-            return f"Standard Deviation: {MetricsticsCalculator.metricstics_standard_deviation(data)}"
+            self.result = f"Standard Deviation: {self.metricstics_standard_deviation(data)}"
+
+        self.data = data
+        return self.result
 
     @staticmethod
     def export_to_csv(data_dict):

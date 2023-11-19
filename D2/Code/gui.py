@@ -41,7 +41,7 @@ class MetricsApp:
 
         visualize_button = ttk.Button(
             options_frame, text="Visualize Data", command=self.visualize_data, width=25)
-        visualize_button.grid(row=4, column=0, padx=5, pady=5)
+        visualize_button.grid(row=3, column=0, padx=5, pady=5, sticky="ew")
 
         self.export_button = ttk.Button(
             options_frame, text="Export Data", command=self.export_data_to_csv, width=25)
@@ -174,7 +174,6 @@ class MetricsApp:
             filename = "exported_data.csv"
             with open(filename, mode='w', newline='') as file:
                 writer = csv.writer(file)
-                # writer.writerow(["Exported Data"])
                 writer.writerow(data_list)
 
             self.result_text.set(f"Data exported to {filename}")
@@ -182,16 +181,18 @@ class MetricsApp:
             self.result_text.set("No data to export.")
 
     # Visualise Data
-
     def visualize_data(self):
-        data = self.entry_data.get("1.0", tk.END)
-        data = data.split(',')
-        data = [float(x.strip()) for x in data if x.strip()]
+        data = self.entry_data.get("1.0", tk.END).strip()
+        if data:
+            data = data.split(',')
+            data = [float(x.strip()) for x in data if x.strip()]
 
-        self.plot_histogram(data)
-        self.plot_box_plot(data)
-        self.plot_line_chart(data)
-        self.plot_scatter_plot(data)
+            self.plot_histogram(data)
+            self.plot_box_plot(data)
+            self.plot_line_chart(data)
+            self.plot_scatter_plot(data)
+        else:
+            self.result_text.set("No data to visualize.")
 
     def plot_histogram(self, data):
         plt.hist(data, bins=10, edgecolor='black')

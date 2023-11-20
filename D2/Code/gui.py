@@ -13,7 +13,10 @@ from pathlib import Path
 
 
 class MetricsApp:
+    """Main application class for the METRICSTICS GUI."""
+
     def __init__(self, master):
+        """Initialize the METRICSTICS GUI."""
         self.master = master
         master.title("METRICSTICS")
 
@@ -100,6 +103,7 @@ class MetricsApp:
         master.protocol("WM_DELETE_WINDOW", self.on_close_window)
 
     def generate_random_data(self):
+        """Generate random data and fill the entry field."""
         # Prompt the user for the number of data points
         num_data_points = askinteger(
             "Generate Random Data", "Enter the number of data points (1-1000):", minvalue=1, maxvalue=2500)
@@ -113,6 +117,7 @@ class MetricsApp:
         self.entry_data.insert(tk.END, ', '.join(map(str, random_data)))
 
     def calculate_statistics(self):
+        """Calculate and display statistics based on user input."""
         selected_option = self.option_var.get()
         data = self.entry_data.get("1.0", tk.END)
         data = data.split(',')
@@ -136,12 +141,15 @@ class MetricsApp:
             command=lambda: self.export_to_csv(export_data))
 
     def export_to_csv(self, data_dict):
+        """Export data to a CSV file."""
         self.result_text.set(MetricsticsMain.export_to_csv(data_dict))
 
     def clear_data(self):
+        """Clear the data entry field."""
         self.entry_data.delete("1.0", tk.END)
 
     def show_help(self):
+        """Display a help message."""
         help_window = tk.Toplevel(self.master)
         help_window.title("Help")
 
@@ -171,6 +179,7 @@ class MetricsApp:
         close_button.pack(pady=10)
 
     def upload_file(self):
+        """Upload data from a file."""
         # Open a file dialog to choose a file
         file_path = filedialog.askopenfilename(title="Select a file",
                                                filetypes=[("Text files", "*.txt")])
@@ -185,6 +194,7 @@ class MetricsApp:
     # Visualise Data
 
     def visualize_data(self):
+        """Visualise data from the inputs."""
         data = self.entry_data.get("1.0", tk.END)
         data = data.split(',')
         data = [float(x.strip()) for x in data if x.strip()]
@@ -195,6 +205,7 @@ class MetricsApp:
         self.plot_scatter_plot(data)
 
     def plot_histogram(self, data):
+        """Plot histogram from the data points"""
         plt.hist(data, bins=10, edgecolor='black')
         plt.title('Histogram')
         plt.xlabel('Value')
@@ -202,6 +213,7 @@ class MetricsApp:
         plt.show()
 
     def plot_box_plot(self, data):
+        """Plot a boxplot from the data points"""
         plt.boxplot(data)
         plt.title('Box Plot')
         plt.xlabel('Data')
@@ -209,6 +221,7 @@ class MetricsApp:
         plt.show()
 
     def plot_line_chart(self, data):
+        """Plot a line cahc plot from the data points"""
         x_values = list(range(1, len(data) + 1))
         plt.plot(x_values, data, marker='o')
         plt.title('Line Chart')
@@ -217,6 +230,7 @@ class MetricsApp:
         plt.show()
 
     def plot_scatter_plot(self, data):
+        """Plot a scatter plot for given data points"""
         x_values = list(range(1, len(data) + 1))
         plt.scatter(x_values, data)
         plt.title('Scatter Plot')
@@ -226,6 +240,7 @@ class MetricsApp:
 
 # Export Data
     def export_data_to_txt(self):
+        """Export data to txt file"""
         data = self.entry_data.get("1.0", tk.END).strip()
         if data:
             data_list = [float(x.strip())
@@ -241,6 +256,7 @@ class MetricsApp:
             self.result_text.set("No data to export.")
 
     def load_latest_session_data(self):
+        """Load latest session data"""
         try:
             latest_file = self.get_latest_session_file()
             if latest_file:
@@ -257,6 +273,7 @@ class MetricsApp:
             return False
 
     def get_latest_session_file(self):
+        """Returns the latest session file"""
         # Get the latest session file based on creation time
         session_files = Path(self.session_directory).glob(
             "session_data_*.json")
@@ -264,6 +281,7 @@ class MetricsApp:
         return latest_file
 
     def on_close_window(self):
+        """Close window behavior"""
         # Check if the session is already closed
         data_to_save = self.entry_data.get("1.0", tk.END).strip()
         if data_to_save:
@@ -281,6 +299,7 @@ class MetricsApp:
             self.master.destroy()
 
     def close_session(self):
+        """Session closing behavior"""
         # Save data to a JSON file with a timestamp-based filename
         data_to_save = self.entry_data.get("1.0", tk.END).strip()
         if data_to_save:
@@ -295,6 +314,7 @@ class MetricsApp:
         self.master.destroy()
 
     def delete_session_data(self):
+        """Delete session method"""
         # Delete session_data.json
         latest_file = self.get_latest_session_file()
         if latest_file:
@@ -304,5 +324,6 @@ class MetricsApp:
                 pass
 
     def get_session_id(self):
+        """Returns the session ID associated with the current session"""
         # Generate a unique session ID using the uuid module
         return str(uuid.uuid4())

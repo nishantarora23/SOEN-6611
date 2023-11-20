@@ -1,16 +1,26 @@
+import json
+import os
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 from tkinter.simpledialog import askinteger
+import uuid
 import matplotlib.pyplot as plt
 from MetricsticsMain import *
 from tkinter import filedialog
 import random
+from pathlib import Path
 
 
 class MetricsApp:
     def __init__(self, master):
         self.master = master
         master.title("METRICSTICS")
+
+        # Initialize session ID
+        self.session_id = None
+        # Specify the directory path for session data
+        self.session_directory = "Z:/Desktop/SOEN 6611 - SM/Project/SOEN-6611/D2/SessionInfo/"
 
         # GUI setup
         style = ttk.Style()
@@ -43,7 +53,8 @@ class MetricsApp:
             options_frame, text="Visualize Data", command=self.visualize_data, width=25)
         visualize_button.grid(row=4, column=0, padx=5, pady=5)
 
-        self.export_data_button = ttk.Button(options_frame, text="Export Data", command=self.export_data_to_txt, width=25)
+        self.export_data_button = ttk.Button(
+            options_frame, text="Export Data", command=self.export_data_to_txt, width=25)
         self.export_data_button.grid(
             row=5, column=0, padx=5, pady=5, sticky="ew")
 
@@ -76,6 +87,17 @@ class MetricsApp:
         self.export_button.grid(
             row=3, column=0, columnspan=2, padx=5, pady=5, sticky="ew")
         self.export_button.grid_remove()
+
+        if self.load_latest_session_data():
+            messagebox.showinfo(
+                "Session Loaded", "Previous session data loaded successfully!")
+
+        close_session_button = ttk.Button(
+            options_frame, text="Close Session", command=self.close_session)
+        close_session_button.grid(row=6, column=0, padx=5, pady=5, sticky="ew")
+
+        # Bind the close protocol to the custom function
+        master.protocol("WM_DELETE_WINDOW", self.on_close_window)
 
     def generate_random_data(self):
         # Prompt the user for the number of data points
@@ -202,11 +224,12 @@ class MetricsApp:
         plt.ylabel('Value')
         plt.show()
 
-#Export Data 
+# Export Data
     def export_data_to_txt(self):
         data = self.entry_data.get("1.0", tk.END).strip()
         if data:
-            data_list = [float(x.strip()) for x in data.split(',') if x.strip()]
+            data_list = [float(x.strip())
+                         for x in data.split(',') if x.strip()]
 
             # Create a text file with data
             filename = "exported_data.txt"
@@ -216,3 +239,70 @@ class MetricsApp:
             self.result_text.set(f"Data exported to {filename}")
         else:
             self.result_text.set("No data to export.")
+
+    def load_latest_session_data(self):
+        try:
+            latest_file = self.get_latest_session_file()
+            if latest_file:
+                with open(latest_file, 'r') as json_file:
+                    data = json.load(json_file)
+                    if 'Data' in data:
+                        session_data = ', '.join(map(str, data['Data']))
+                        self.entry_data.insert(tk.END, session_data)
+                        return True
+            return False
+        except json.JSONDecodeError:
+            messagebox.showwarning(
+                "Invalid JSON", "Error loading session data. Invalid JSON format.")
+            return False
+
+    def get_latest_session_file(self):
+        # Get the latest session file based on creation time
+        session_files = Path(self.session_directory).glob(
+            "session_data_*.json")
+        latest_file = max(session_files, key=os.path.getctime, default=None)
+        return latest_file
+
+    def on_close_window(self):
+        # Check if the session is already closed
+        data_to_save = self.entry_data.get("1.0", tk.END).strip()
+        if data_to_save:
+            # If data is present, ask the user if they want to save before closing
+            response = tk.messagebox.askyesno(
+                "Unsaved Changes", "Do you want to save your changes before closing?")
+            if response:
+                self.close_session()
+            else:
+                # Delete session_data.json if the user clicks on "No"
+                self.delete_session_data()
+                self.master.destroy()
+        else:
+            # If no data, close the window directly
+            self.master.destroy()
+
+    def close_session(self):
+        # Save data to a JSON file with a timestamp-based filename
+        data_to_save = self.entry_data.get("1.0", tk.END).strip()
+        if data_to_save:
+            data_list = [float(x.strip())
+                         for x in data_to_save.split(',') if x.strip()]
+            session_id = self.get_session_id()
+            with open(os.path.join(self.session_directory, f"session_data_{session_id}.json"), 'w') as json_file:
+                json.dump({"Data": data_list}, json_file)
+
+        # Clear data and close the window
+        self.clear_data()
+        self.master.destroy()
+
+    def delete_session_data(self):
+        # Delete session_data.json
+        latest_file = self.get_latest_session_file()
+        if latest_file:
+            try:
+                os.remove(latest_file)
+            except FileNotFoundError:
+                pass
+
+    def get_session_id(self):
+        # Generate a unique session ID using the uuid module
+        return str(uuid.uuid4())

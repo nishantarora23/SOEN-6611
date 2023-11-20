@@ -1,8 +1,12 @@
 from MetricsticsHelper import *
+
+
 class MetricsticsCalculator:
+    """A class containing static methods for calculating various statistical metrics."""
 
     @staticmethod
     def metricstics_min(data):
+        """Calculate and return the minimum value in the given data."""
         if not data:
             return None
         minimum = data[0]
@@ -14,6 +18,7 @@ class MetricsticsCalculator:
 
     @staticmethod
     def metricstics_max(data):
+        """Calculate and return the maximum value in the given data."""
         if not data:
             return None
         maximum = data[0]
@@ -25,6 +30,7 @@ class MetricsticsCalculator:
 
     @staticmethod
     def metricstics_mode(data):
+        """Calculate and return the mode of the given data."""
         if not data:
             return None
         frequencies = []
@@ -50,6 +56,7 @@ class MetricsticsCalculator:
 
     @staticmethod
     def metricstics_median(data):
+        """Calculate and return the median of the given data."""
         if not data:
             return None
         MetricsticsHelper.metricstics_sort(data)
@@ -65,6 +72,7 @@ class MetricsticsCalculator:
 
     @staticmethod
     def metricstics_mean(data):
+        """Calculate and return the mean of the given data."""
         if not data:
             return None
         total = MetricsticsHelper.metricstics_sum(data)
@@ -74,6 +82,7 @@ class MetricsticsCalculator:
 
     @staticmethod
     def metricstics_mean_absolute_deviation(data):
+        """Calculate and return the mean absolute deviation of the given data."""
         if not data:
             return None
         mean = MetricsticsCalculator.metricstics_mean(data)
@@ -87,6 +96,7 @@ class MetricsticsCalculator:
 
     @staticmethod
     def metricstics_standard_deviation(data):
+        """Calculate and return the standard deviation of the given data."""
         variance = MetricsticsCalculator.metricstics_variance(data)
         if variance is None:
             return None
@@ -95,6 +105,7 @@ class MetricsticsCalculator:
 
     @staticmethod
     def metricstics_variance(data):
+        """Calculate and return the variance of the given data."""
         if not data:
             return None
         mean = MetricsticsCalculator.metricstics_mean(data)

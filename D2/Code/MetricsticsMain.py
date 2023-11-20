@@ -2,13 +2,15 @@ import csv
 from MetricsticsCalculator import *
 
 class MetricsticsMain:
-    """  A class designed for computing statistical measures on a list of numbers, excluding the utilization of built- in functions. """
+    """A class designed for computing statistical measures on a list of numbers, excluding the utilization of built-in functions."""
+
     def __init__(self):
         self.data = None
         self.result = None
 
     @staticmethod
     def calculate_metricstics(self, data, selected_option):
+        """Calculate selected statistical metric on the given data."""
         if not data:
             self.result = "Please enter valid data"
             return self.result
@@ -33,7 +35,7 @@ class MetricsticsMain:
 
     @staticmethod
     def export_to_csv(data_dict):
-        """ Export data to a CSV file. """
+        """Export data to a CSV file."""
         filename = "statistics_data.csv"
         with open(filename, mode='w', newline='') as file:
             writer = csv.writer(file)

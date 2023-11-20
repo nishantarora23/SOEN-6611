@@ -43,10 +43,9 @@ class MetricsApp:
             options_frame, text="Visualize Data", command=self.visualize_data, width=25)
         visualize_button.grid(row=4, column=0, padx=5, pady=5)
 
-        self.export_button = ttk.Button(
-            options_frame, text="Export Data", command=self.export_data_to_csv, width=25)
-        self.export_button.grid(
-            row=5, column=0, columnspan=2, padx=5, pady=5, sticky="ew")
+        self.export_data_button = ttk.Button(options_frame, text="Export Data", command=self.export_data_to_txt, width=25)
+        self.export_data_button.grid(
+            row=5, column=0, padx=5, pady=5, sticky="ew")
 
         label_data = ttk.Label(
             right_frame, text="Enter data (comma-separated):")
@@ -161,26 +160,6 @@ class MetricsApp:
                 self.entry_data.delete("1.0", tk.END)
                 self.entry_data.insert(tk.END, file_content)
 
-    # Store the entered data
-
-    # Modify the export_to_csv method
-    def export_data_to_csv(self):
-        data = self.entry_data.get("1.0", tk.END).strip()
-        if data:
-            data_list = [float(x.strip())
-                         for x in data.split(',') if x.strip()]
-
-            # Create a CSV file with data
-            filename = "exported_data.csv"
-            with open(filename, mode='w', newline='') as file:
-                writer = csv.writer(file)
-                # writer.writerow(["Exported Data"])
-                writer.writerow(data_list)
-
-            self.result_text.set(f"Data exported to {filename}")
-        else:
-            self.result_text.set("No data to export.")
-
     # Visualise Data
 
     def visualize_data(self):
@@ -222,3 +201,18 @@ class MetricsApp:
         plt.xlabel('Data Point')
         plt.ylabel('Value')
         plt.show()
+
+#Export Data 
+    def export_data_to_txt(self):
+        data = self.entry_data.get("1.0", tk.END).strip()
+        if data:
+            data_list = [float(x.strip()) for x in data.split(',') if x.strip()]
+
+            # Create a text file with data
+            filename = "exported_data.txt"
+            with open(filename, mode='w') as file:
+                file.write('\n'.join(map(str, data_list)))
+
+            self.result_text.set(f"Data exported to {filename}")
+        else:
+            self.result_text.set("No data to export.")

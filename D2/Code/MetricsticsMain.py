@@ -30,7 +30,7 @@ class MetricsticsMain:
         filename = "statistics_data.csv"
         with open(filename, mode='w', newline='') as file:
             writer = csv.writer(file)
-            writer.writerow(['Data'])
+            #writer.writerow(['Data'])
             for value in data_dict['Data']:
                 writer.writerow([value])
             if 'Mean Absolute Deviation' in data_dict:

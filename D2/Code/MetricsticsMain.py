@@ -4,34 +4,31 @@ from MetricsticsCalculator import *
 class MetricsticsMain:
     """A class designed for computing statistical measures on a list of numbers, excluding the utilization of built-in functions."""
 
-    def __init__(self):
-        self.data = None
-        self.result = None
+    def __init__(self, data):
+        self.data = data
 
-    @staticmethod
-    def calculate_metricstics(self, data, selected_option):
+    def calculate_metricstics(self, selected_option):
         """Calculate selected statistical metric on the given data."""
-        if not data:
-            self.result = "Please enter valid data"
-            return self.result
+        if not self.data:
+            result = "Please enter valid data"
+            return result
 
         if selected_option == "Minimum":
-            self.result = f"Minimum: {self.metricstics_min(data)}"
+            result = f"Minimum: {MetricsticsCalculator.metricstics_min(self.data)}"
         elif selected_option == "Maximum":
-            self.result = f"Maximum: {self.metricstics_max(data)}"
+            result = f"Maximum: {MetricsticsCalculator.metricstics_max(self.data)}"
         elif selected_option == "Mode":
-            self.result = f"Mode: {self.metricstics_mode(data)}"
+            result = f"Mode: {MetricsticsCalculator.metricstics_mode(self.data)}"
         elif selected_option == "Median":
-            self.result = f"Median: {self.metricstics_median(data)}"
+            result = f"Median: {MetricsticsCalculator.metricstics_median(self.data)}"
         elif selected_option == "Mean":
-            self.result = f"Mean: {self.metricstics_mean(data)}"
+            result = f"Mean: {MetricsticsCalculator.metricstics_mean(self.data)}"
         elif selected_option == "Mean Absolute Deviation":
-            self.result = f"Mean Absolute Deviation: {self.metricstics_mean_absolute_deviation(data)}"
+            result = f"Mean Absolute Deviation: {MetricsticsCalculator.metricstics_mean_absolute_deviation(self.data)}"
         elif selected_option == "Standard Deviation":
-            self.result = f"Standard Deviation: {self.metricstics_standard_deviation(data)}"
+            result = f"Standard Deviation: {MetricsticsCalculator.metricstics_standard_deviation(self.data)}"
 
-        self.data = data
-        return self.result
+        return result
 
     @staticmethod
     def export_to_csv(data_dict):

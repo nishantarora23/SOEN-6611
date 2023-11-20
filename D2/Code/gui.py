@@ -86,7 +86,9 @@ class MetricsApp:
         data = self.entry_data.get("1.0", tk.END)
         data = data.split(',')
         data = [float(x.strip()) for x in data if x.strip()]
-        result = MetricsticsMain.calculate_metricstics(data, selected_option)
+        metrics_instance = MetricsticsMain(data)
+        result = metrics_instance.calculate_metricstics(selected_option)
+
         if selected_option.strip() == 'Mode':
             self.result_text.set(result)
         else:

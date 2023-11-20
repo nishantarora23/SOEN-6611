@@ -8,9 +8,12 @@ import random
 
 
 class MetricsApp:
-    def __init__(self, master):
+    def __init__(self, master, current_role):
+
         self.master = master
-        master.title("METRICSTICS")
+        self.current_role = current_role
+        self.master.title(f"METRICSTICS - {self.current_role}")
+        print(f"Received role in MetricsApp: {current_role}")
 
         # GUI setup
         style = ttk.Style()
@@ -41,9 +44,10 @@ class MetricsApp:
 
         visualize_button = ttk.Button(
             options_frame, text="Visualize Data", command=self.visualize_data, width=25)
-        visualize_button.grid(row=4, column=0, padx=5, pady=5)
+        visualize_button.grid(row=4, column=0, padx=5, pady=5, sticky="ew")
 
-        self.export_data_button = ttk.Button(options_frame, text="Export Data", command=self.export_data_to_txt, width=25)
+        self.export_data_button = ttk.Button(
+            options_frame, text="Export Data", command=self.export_data_to_txt, width=25)
         self.export_data_button.grid(
             row=5, column=0, padx=5, pady=5, sticky="ew")
 
@@ -76,6 +80,51 @@ class MetricsApp:
         self.export_button.grid(
             row=3, column=0, columnspan=2, padx=5, pady=5, sticky="ew")
         self.export_button.grid_remove()
+
+        # Add Save Session and Load Session buttons
+        save_session_button = ttk.Button(
+            options_frame, text="Save Session", command=lambda: self.save_session(current_role), width=10)
+        save_session_button.grid(
+            row=6, column=0, padx=5, pady=5, sticky="ew")
+
+        load_session_button = ttk.Button(
+            options_frame, text="Load Session", command=self.load_session, width=25)
+        load_session_button.grid(
+            row=7, column=0, padx=5, pady=5, sticky="ew")
+
+    def save_session(self, current_role):
+        file_path = filedialog.asksaveasfilename(
+            defaultextension=".txt", filetypes=[("Text files", "*.txt")])
+        if file_path:
+            # Retrieve data from the entry_data widget
+            data = self.entry_data.get("1.0", tk.END)
+
+            # Implement the logic to save session data to the chosen file
+            with open(file_path, 'w') as file:
+                file.write(f"Role: {current_role}\n")
+                file.write(f"Data: {data}\n")
+
+    def load_session(self):
+        file_path = filedialog.askopenfilename(title="Load Session",
+                                               filetypes=[("Text files", "*.txt")])
+        if file_path:
+            # Implement the logic to load session data from the chosen file
+            with open(file_path, 'r') as file:
+                # Read the data and update the current_role and entry_data
+                session_data = file.readlines()
+
+                # Extract role and data from the session_data
+                role_line = session_data[0].strip()
+                data_line = session_data[1].strip()
+
+                # Update the current_role based on the loaded role
+                current_role = role_line.split(":")[1].strip()
+                self.current_role = current_role
+                self.master.title(f"METRICSTICS - {self.current_role}")
+
+                # Fill the entry_data field with the loaded data
+                self.entry_data.delete("1.0", tk.END)
+                self.entry_data.insert(tk.END, data_line)
 
     def generate_random_data(self):
         # Prompt the user for the number of data points
@@ -202,11 +251,12 @@ class MetricsApp:
         plt.ylabel('Value')
         plt.show()
 
-#Export Data 
+# Export Data
     def export_data_to_txt(self):
         data = self.entry_data.get("1.0", tk.END).strip()
         if data:
-            data_list = [float(x.strip()) for x in data.split(',') if x.strip()]
+            data_list = [float(x.strip())
+                         for x in data.split(',') if x.strip()]
 
             # Create a text file with data
             filename = "exported_data.txt"

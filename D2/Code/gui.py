@@ -167,6 +167,8 @@ class MetricsApp:
         Reset the data entry field.
     6. Export to CSV: 
         Save data and result to CSV.
+    7. Upload File:
+        Upload a text file and populate the data
 
     Thank you for using METRICSTICS!"""
 

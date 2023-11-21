@@ -54,7 +54,7 @@ class MetricsApp:
 
         visualize_button = ttk.Button(
             options_frame, text="Visualize Data", command=self.visualize_data, width=25)
-        visualize_button.grid(row=4, column=0, padx=5, pady=5)
+        visualize_button.grid(row=5, column=0, padx=5, pady=5, sticky="ew")
 
         self.export_data_button = ttk.Button(
             options_frame, text="Export Data", command=self.export_data_to_txt, width=25)

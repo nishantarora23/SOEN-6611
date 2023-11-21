@@ -190,7 +190,7 @@ class MetricsApp:
     9.  Save data:
          Save data in a text file.
     10. Close Session:
-         Close session without saving.
+          Close session without saving.
 
     Thank you for using METRICSTICS!"""
 

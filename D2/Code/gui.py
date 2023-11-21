@@ -64,7 +64,7 @@ class MetricsApp:
         label_data = ttk.Label(
             right_frame, text="Enter data (comma-separated):")
         label_data.grid(row=0, column=0, padx=5, pady=5, sticky="w")
-        self.entry_data = tk.Text(right_frame, height=5, width=50)
+        self.entry_data = tk.Text(right_frame, height=12, width=50)
         self.entry_data.grid(row=1, column=0, padx=5, pady=5)
 
         bottom_frame = tk.Frame(master)

@@ -23,7 +23,18 @@ class MetricsApp:
         # Initialize session ID
         self.session_id = None
         # Specify the directory path for session data
-        self.session_directory = "Z:/Desktop/SOEN 6611 - SM/Project/SOEN-6611/D2/SessionInfo/"
+        current_directory = os.getcwd()
+        
+        # Specify the folder name
+        folder_name = "SessionInfo"
+        
+        # Create the full path to the session directory
+        self.session_directory = os.path.join(current_directory, folder_name)
+        
+        # Check if the directory exists, and create it if not
+        if not os.path.exists(self.session_directory):
+            os.makedirs(self.session_directory)
+            print(f"Directory '{self.session_directory}' created.")
 
         # GUI setup
         style = ttk.Style()
@@ -106,7 +117,7 @@ class MetricsApp:
         """Generate random data and fill the entry field."""
         # Prompt the user for the number of data points
         num_data_points = askinteger(
-            "Generate Random Data", "Enter the number of data points (1-1000):", minvalue=1, maxvalue=2500)
+            "Generate Random Data", "Enter the number of data points (1-1000):", minvalue=1, maxvalue=1000)
         if num_data_points is None:
             # User clicked cancel
             return

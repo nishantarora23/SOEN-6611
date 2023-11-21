@@ -171,20 +171,26 @@ class MetricsApp:
 
         help_text = """Welcome to METRICSTICS!
 
-    1. Options: 
-        Choose a statistical measure from the drop-down menu.
-    2. Generate Random Data: 
-        Click to fill the data field with random numbers.
-    3. Enter Data: 
-        Manually enter numbers, separated by commas.
-    4. Calculate: 
-        Click to see the result based on your chosen measure.
-    5. Clear Data: 
-        Reset the data entry field.
-    6. Export to CSV: 
-        Save data and result to CSV.
-    7. Upload File:
-        Upload a text file and populate the data
+    1.  Options: 
+         Choose a statistical measure from the drop-down menu.
+    2.  Generate Random Data: 
+         Click to fill the data field with random numbers.
+    3.  Enter Data: 
+         Manually enter numbers, separated by commas.
+    4.  Calculate: 
+         Click to see the result based on your chosen measure.
+    5.  Clear Data: 
+         Reset the data entry field.
+    6.  Export to CSV: 
+         Save data and result to CSV.
+    7.  Upload File:
+         Upload a text file and populate the data
+    8.  Visualize:
+         Visualize data in Histogram, Box Plot, Scatter Plot, and Line Chart.
+    9.  Save data:
+         Save data in a text file.
+    10. Close Session:
+         Close session without saving.
 
     Thank you for using METRICSTICS!"""
 

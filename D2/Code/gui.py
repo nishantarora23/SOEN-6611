@@ -123,22 +123,25 @@ class MetricsApp:
         data = data.split(',')
         data = [float(x.strip()) for x in data if x.strip()]
         result = MetricsticsMain.calculate_metricstics(data, selected_option)
-        if selected_option.strip() == 'Mode':
-            self.result_text.set(result)
-        else:
-            label, numeric_value = result.split(':')
-            numeric_value = numeric_value.strip()
-            if '.' in numeric_value and len(numeric_value.split('.')[1]) > 2:
-                rounded_numeric_value = round(float(numeric_value), 3)
-                rounded_result = f"{label.strip()}: {rounded_numeric_value}"
+        if result != "Please enter valid data":
+            if selected_option.strip() == 'Mode':
+                self.result_text.set(result)
             else:
-                rounded_result = f"{label.strip()}: {numeric_value}"
-            self.result_text.set(rounded_result)
+                label, numeric_value = result.split(':')
+                numeric_value = numeric_value.strip()
+                if '.' in numeric_value and len(numeric_value.split('.')[1]) > 2:
+                    rounded_numeric_value = round(float(numeric_value), 3)
+                    rounded_result = f"{label.strip()}: {rounded_numeric_value}"
+                else:
+                    rounded_result = f"{label.strip()}: {numeric_value}"
+                self.result_text.set(rounded_result)
+        else:
+            self.result_text.set(result)
         self.export_button.grid(
             row=4, column=0, columnspan=2, padx=5, pady=5, sticky="ew")
         export_data = {"Data": data, "Statistic": selected_option}
         self.export_button.config(
-            command=lambda: self.export_to_csv(export_data))
+             command=lambda: self.export_to_csv(export_data))
 
     def export_to_csv(self, data_dict):
         """Export data to a CSV file."""

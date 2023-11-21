@@ -1,46 +1,42 @@
 import csv
 from MetricsticsCalculator import *
 
+
 class MetricsticsMain:
-    """A class designed for computing statistical measures on a list of numbers, excluding the utilization of built-in functions."""
+    """  A class designed for computing statistical measures on a list of numbers, excluding the utilization of built- in functions. """
 
-    def __init__(self, data):
-        self.data = data
-
-    def calculate_metricstics(self, selected_option):
-        """Calculate selected statistical metric on the given data."""
-        if not self.data:
-            result = "Please enter valid data"
-            return result
+    @staticmethod
+    def calculate_metricstics(data, selected_option):
+        if not data:
+            return "Please enter valid data"
 
         if selected_option == "Minimum":
-            result = f"Minimum: {MetricsticsCalculator.metricstics_min(self.data)}"
+            return f"Minimum: {MetricsticsCalculator.metricstics_min(data)}"
         elif selected_option == "Maximum":
-            result = f"Maximum: {MetricsticsCalculator.metricstics_max(self.data)}"
+            return f"Maximum: {MetricsticsCalculator.metricstics_max(data)}"
         elif selected_option == "Mode":
-            result = f"Mode: {MetricsticsCalculator.metricstics_mode(self.data)}"
+            return f"Mode: {MetricsticsCalculator.metricstics_mode(data)}"
         elif selected_option == "Median":
-            result = f"Median: {MetricsticsCalculator.metricstics_median(self.data)}"
+            return f"Median: {MetricsticsCalculator.metricstics_median(data)}"
         elif selected_option == "Mean":
-            result = f"Mean: {MetricsticsCalculator.metricstics_mean(self.data)}"
+            return f"Mean: {MetricsticsCalculator.metricstics_mean(data)}"
         elif selected_option == "Mean Absolute Deviation":
-            result = f"Mean Absolute Deviation: {MetricsticsCalculator.metricstics_mean_absolute_deviation(self.data)}"
+            return f"Mean Absolute Deviation: {MetricsticsCalculator.metricstics_mean_absolute_deviation(data)}"
         elif selected_option == "Standard Deviation":
-            result = f"Standard Deviation: {MetricsticsCalculator.metricstics_standard_deviation(self.data)}"
-
-        return result
+            return f"Standard Deviation: {MetricsticsCalculator.metricstics_standard_deviation(data)}"
 
     @staticmethod
     def export_to_csv(data_dict):
-        """Export data to a CSV file."""
+        """ Export data to a CSV file. """
         filename = "statistics_data.csv"
         with open(filename, mode='w', newline='') as file:
             writer = csv.writer(file)
-            #writer.writerow(['Data'])
+            # writer.writerow(['Data'])
             for value in data_dict['Data']:
                 writer.writerow([value])
             if 'Mean Absolute Deviation' in data_dict:
-                writer.writerow(['MAD =', data_dict['Mean Absolute Deviation']])
+                writer.writerow(
+                    ['MAD =', data_dict['Mean Absolute Deviation']])
             elif 'Standard Deviation' in data_dict:
                 writer.writerow(['SD =', data_dict['Standard Deviation']])
         return f"Data exported to {filename}"
